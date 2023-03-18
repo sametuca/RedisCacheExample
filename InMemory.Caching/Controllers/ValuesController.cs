@@ -28,11 +28,6 @@ public class ValuesController : ControllerBase
     public string? Get()
     {
         // If the key is not found, the method returns false and the value parameter contains the default value for the type of the value parameter.
-        if (_memoryCache.TryGetValue("name", out string? name))
-        {
-            return name;
-        }
-        
-        return "Not Found";
+        return _memoryCache.TryGetValue("name", out string? name) ? name : "Not Found";
     }
 }
