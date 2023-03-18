@@ -30,4 +30,24 @@ public class ValuesController : ControllerBase
         // If the key is not found, the method returns false and the value parameter contains the default value for the type of the value parameter.
         return _memoryCache.TryGetValue("name", out string? name) ? name : "Not Found";
     }
+
+    // GET api/values
+    [HttpGet("set-date")]
+    public void SetDate()
+    {
+        // The Set method adds or updates a cache entry in the cache.
+        _memoryCache.Set<DateTime>("date",DateTime.Now,options:new()
+        {
+            AbsoluteExpiration = DateTime.Now.AddSeconds(30),
+            SlidingExpiration = TimeSpan.FromSeconds(5)
+        });
+    }
+    
+    // GET api/values
+    [HttpGet("get-date")]
+    public DateTime GetDate()
+    {
+        // If the key is not found, the method returns false and the value parameter contains the default value for the type of the value parameter.
+        return _memoryCache.Get<DateTime>("date");
+    }
 }
