@@ -31,7 +31,9 @@ public class ValuesController : ControllerBase
     {
         _memoryCache.Set<DateTime>("date",DateTime.Now,options:new()
         {
+            //net olarak ne kadar süre cachede tutulacağı
             AbsoluteExpiration = DateTime.Now.AddSeconds(30),
+            //ne aralıklarla erişim sağlanması gerektiği. aksi halde silinecektir.
             SlidingExpiration = TimeSpan.FromSeconds(5)
         });
     }
